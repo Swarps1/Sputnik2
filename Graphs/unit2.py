@@ -28,41 +28,114 @@ speed_x_data = np.array(speed_x_data)
 speed_y_data = np.array(speed_y_data)
 speed = np.sqrt(speed_y_data**2 + speed_x_data**2)
 
-fig3, (ax4, ax5) = plt.subplots(2, 1, figsize=(10, 12))
+# fig3, (ax4, ax5) = plt.subplots(2, 1, figsize=(10, 12))
 
-# График высоты
-ax4.plot(time_phys, y - earth_r, label="Физическая модель", color="green")
-ax4.set_xlabel("Время (с)")
-ax4.set_ylabel("Высота (м)")
-ax4.legend()
-ax4.grid()
+# # График высоты
+# ax4.plot(time_phys, y - earth_r, label="Физическая модель", color="green")
+# ax4.set_xlabel("Время (с)")
+# ax4.set_ylabel("Высота (м)")
+# ax4.legend()
+# ax4.grid()
 
-# График скорости от времени
+# # График скорости от времени
 
-ax5.plot(time_phys, speed_phys, label="Скорость от времени", color="green")
-ax5.set_xlabel("Время (с)")
-ax5.set_ylabel("Скорость (м/с)")
-ax5.set_title("Скорость ракеты от времени")
-ax5.legend()
-ax5.grid()
+# ax5.plot(time_phys, vy, label="Скорость от времени", color="green")
+# ax5.set_xlabel("Время (с)")
+# ax5.set_ylabel("Скорость (м/с)")
+# ax5.set_title("Скорость ракеты от времени")
+# ax5.legend()
+# ax5.grid()
 
-# Построение графиков из данных автопилота
-fig1, axs1 = plt.subplots(2, 1, figsize=(10, 10))
+# # Построение графиков из данных автопилота
+# fig1, axs1 = plt.subplots(2, 1, figsize=(10, 10))
 
-# График высоты
-axs1[0].plot(time_auto, altitude_data, label="Высота", color="blue", linewidth=2)
-axs1[0].set_xlabel("Время (с)")
-axs1[0].set_ylabel("Высота (м)")
-axs1[0].set_title("График высоты от времени")
-axs1[0].legend()
-axs1[0].grid()
+# # График высоты
+# axs1[0].plot(time_auto, altitude_data, label="Высота", color="blue", linewidth=2)
+# axs1[0].set_xlabel("Время (с)")
+# axs1[0].set_ylabel("Высота (м)")
+# axs1[0].set_title("График высоты от времени")
+# axs1[0].legend()
+# axs1[0].grid()
 
-axs1[1].plot(time_data, speed, label="Скорость от времени", color="green", linewidth=2)
-axs1[1].set_xlabel("Время (с)")
-axs1[1].set_ylabel("Скорость (м/с)")
-axs1[1].set_title("Скорость ракеты от времени")
-axs1[1].legend()
-axs1[1].grid()
+# axs1[1].plot(time_data, speed_x_data, label="Скорость X", color="red")
+# axs1[1].set_title("График скорости по X")
+# axs1[1].set_xlabel("Время (с)")
+# axs1[1].set_ylabel("Скорость (м/с)")
+# axs1[1].legend()
+# axs1[1].grid()
+
+
+
+
+# Сравнение Графиков
+
+fig, axs = plt.subplots(2, 1, figsize=(10, 10), sharex=True)  
+
+# --- График физической модели ---
+axs[0].plot(time_phys, y - earth_r, label="Физическая модель", color="green")
+axs[0].set_ylabel("Высота (м)")
+axs[0].set_title("Сравнение высоты: Физическая модель vs Автопилот")
+axs[0].legend()
+axs[0].grid()
+
+# --- График высоты автопилота ---
+axs[1].plot(time_auto, altitude_data, label="Автопилот", color="blue", linewidth=2)
+axs[1].set_xlabel("Время (с)")
+axs[1].set_ylabel("Высота (м)")
+axs[1].legend()
+axs[1].grid()
+
+# Создаем фигуру с двумя подграфиками (2 строки, 1 столбец)
+fig, axs = plt.subplots(2, 1, figsize=(10, 10), sharex=True)  
+
+# --- График скорости от времени (Физическая модель) ---
+axs[0].plot(time_phys, vy, label="Скорость (Физ. модель)", color="green")
+axs[0].set_ylabel("Скорость (м/с)")
+axs[0].set_title("Скорость ракеты от времени")
+axs[0].legend()
+axs[0].grid()
+
+# --- График скорости по X (Автопилот) ---
+axs[1].plot(time_data, speed_x_data, label="Скорость ракеты", color="red")
+axs[1].set_xlabel("Время (с)")
+axs[1].set_ylabel("Скорость (м/с)")
+axs[1].set_title("График скорости ракеты")
+axs[1].legend()
+axs[1].grid()
+
+
+fig, ax = plt.subplots(figsize=(10, 6))
+# Первый график (Физическая модель)
+ax.plot(time_phys, y - earth_r, label="Физическая модель", color="green")
+# Второй график (Автопилот)
+ax.plot(time_auto, altitude_data, label="Автопилот", color="blue", linewidth=2)
+# Настройки осей и заголовка
+ax.set_xlabel("Время (с)")
+ax.set_ylabel("Высота (м)")
+ax.set_title("График высоты от времени")
+ax.legend()
+ax.grid()
+
+
+fig, ax = plt.subplots(figsize=(10, 6))
+# Первый график (Скорость от времени)
+ax.plot(time_phys, vy, label="Скорость ракеты (Физическая модель)", color="green")
+# Второй график (Скорость X)
+ax.plot(time_data, speed_x_data, label="Скорость ракеты (Автопилот)", color="red")
+# Настройки осей и заголовка
+ax.set_xlabel("Время (с)")
+ax.set_ylabel("Скорость (м/с)")
+ax.set_title("График скорости от времени")
+ax.legend()
+ax.grid()
+
+
+# axs1[1].plot(time_data, speed, label="Скорость от времени", color="green", linewidth=2)
+# axs1[1].set_xlabel("Время (с)")
+# axs1[1].set_ylabel("Скорость (м/с)")
+# axs1[1].set_title("Скорость ракеты от времени")
+# axs1[1].legend()
+# axs1[1].grid()
 
 
 # Создаем графики
