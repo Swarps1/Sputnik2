@@ -101,10 +101,10 @@ altitude = vessel.flight().surface_altitude
 tta = vessel.orbit.time_to_apoapsis
 print(f'time to apoapsis {tta}')
 
-while altitude < 70000:
-    altitude = vessel.flight().surface_altitude
-    continue
-conn.space_center.warp_to(conn.space_center.ut + tta - 30)
+# while altitude < 70000:
+#     altitude = vessel.flight().surface_altitude
+#     continue
+# conn.space_center.warp_to(conn.space_center.ut + tta - 30)
 
 while tta > 10:
     tta = vessel.orbit.time_to_apoapsis

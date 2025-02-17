@@ -134,12 +134,15 @@ def main():
         add_spd(*surface_velocity)
 
     altitude = vessel.flight().surface_altitude
-    tta = vessel.orbit.time_to_apoapsis
-    print(f'time to apoapsis {tta}')
 
-    
-    while tta > 10:
-        tta = vessel.orbit.time_to_apoapsis
+    vessel = conn.space_center.active_vessel
+
+    # Время полета (в секундах)
+    mission_time = vessel.met  # MET = Mission Elapsed Time
+
+    while mission_time <= 205:
+        vessel = conn.space_center.active_vessel
+        mission_time = vessel.met
 
         surface_velocity = surface_velocity_stream()
         curr_speed = math.sqrt(sum(v**2 for v in surface_velocity))
