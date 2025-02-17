@@ -138,9 +138,21 @@ def main():
     print(f'time to apoapsis {tta}')
 
     
-    # while tta > 10:
-    #     tta = vessel.orbit.time_to_apoapsis
-    #     continue
+    while tta > 10:
+        tta = vessel.orbit.time_to_apoapsis
+
+        surface_velocity = surface_velocity_stream()
+        curr_speed = math.sqrt(sum(v**2 for v in surface_velocity))
+        altitude = vessel.flight().surface_altitude
+
+        nowt = round(time.time() - t0)
+        pos = vessel.position(body.reference_frame)
+        x, y, z = pos[0] - x0, pos[1] - y0, pos[2] - z0
+
+        add_inf(altitude, vessel.mass, nowt, target_pitch)
+        add_point(x, y, z)
+        add_spd(*surface_velocity)
+        continue
     # # Построение графиков
     # fig1, axs1 = plt.subplots(2, 1, figsize=(10, 10))
 

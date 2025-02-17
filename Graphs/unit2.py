@@ -25,37 +25,37 @@ speed_auto = speed_data
 height_auto = altitude_data
 
 # Создаем графики
-# fig2, (ax2, ax3) = plt.subplots(2, 1, figsize=(10, 12))
+fig2, (ax2, ax3) = plt.subplots(2, 1, figsize=(10, 12))
 
-# # График скорости по X
-# ax2.plot(time_phys, vx, label="Физическая модель (Vx)", color="green")
-# ax2.set_xlabel("Время (с)")
-# ax2.set_ylabel("Скорость по X (м/с)")
-# ax2.legend()
-# ax2.grid()
+# График скорости по X
+ax2.plot(time_phys, vx, label="Физическая модель (Vx)", color="green")
+ax2.set_xlabel("Время (с)")
+ax2.set_ylabel("Скорость по X (м/с)")
+ax2.legend()
+ax2.grid()
 
-# # График скорости по Y
-# ax3.plot(time_phys, vy, label="Физическая модель (Vy)", color="green")
-# ax3.set_xlabel("Время (с)")
-# ax3.set_ylabel("Скорость по Y (м/с)")
-# ax3.legend()
-# ax3.grid()
+# График скорости по Y
+ax3.plot(time_phys, vy, label="Физическая модель (Vy)", color="green")
+ax3.set_xlabel("Время (с)")
+ax3.set_ylabel("Скорость по Y (м/с)")
+ax3.legend()
+ax3.grid()
 
-# fig3, (ax4, ax5) = plt.subplots(2, 1, figsize=(10, 12))
+fig3, (ax4, ax5) = plt.subplots(2, 1, figsize=(10, 12))
 
-# # График высоты
-# ax4.plot(time_phys, y - earth_r, label="Физическая модель", color="green")
-# ax4.set_xlabel("Время (с)")
-# ax4.set_ylabel("Высота (м)")
-# ax4.legend()
-# ax4.grid()
+# График высоты
+ax4.plot(time_phys, y - earth_r, label="Физическая модель", color="green")
+ax4.set_xlabel("Время (с)")
+ax4.set_ylabel("Высота (м)")
+ax4.legend()
+ax4.grid()
 
-# # График смещения по X
-# ax5.plot(time_phys, x, label="Физическая модель", color="green")
-# ax5.set_xlabel("Время (с)")
-# ax5.set_ylabel("Смещение по X (м)")
-# ax5.legend()
-# ax5.grid()
+# График смещения по X
+ax5.plot(time_phys, x, label="Физическая модель", color="green")
+ax5.set_xlabel("Время (с)")
+ax5.set_ylabel("Смещение по X (м)")
+ax5.legend()
+ax5.grid()
 
 
 # Построение графиков из данных автопилота
@@ -77,24 +77,24 @@ axs1[1].set_title("График наклона от времени")
 axs1[1].legend()
 axs1[1].grid()
 
-fig2, axs2 = plt.subplots(figsize=(10, 5))
+fig2, axs2 = plt.subplots(2, 1, figsize=(10, 15))
 
-# Графики скоростей
-axs2.plot(time_auto, speed_x_data, label="Скорость Y", color="red")
-axs2.set_title("График скорости по Y")
-axs2.set_xlabel("Время (с)")
-axs2.set_ylabel("Скорость (м/с)")
-axs2.legend()
-axs2.grid()
+#Графики скоростей
+axs2[0].plot(time_data, speed_x_data, label="Скорость X", color="red")
+axs2[0].set_title("График скорости по X")
+axs2[0].set_xlabel("Время (с)")
+axs2[0].set_ylabel("Скорость (м/с)")
+axs2[0].legend()
+axs2[0].grid()
 
-# axs2[1].plot(time_auto, speed_y_data, label="Скорость Y", color="blue")
-# axs2[1].set_title("График скорости по Y")
-# axs2[1].set_xlabel("Время (с)")
-# axs2[1].set_ylabel("Скорость (м/с)")
-# axs2[1].legend()
-# axs2[1].grid()
+axs2[1].plot(time_data, speed_y_data, label="Скорость Y", color="blue")
+axs2[1].set_title("График скорости по Y")
+axs2[1].set_xlabel("Время (с)")
+axs2[1].set_ylabel("Скорость (м/с)")
+axs2[1].legend()
+axs2[1].grid()
 
-# axs2[2].plot(time_auto, speed_z_data, label="Скорость Z", color="green")
+# axs2[2].plot(time_data, speed_z_data, label="Скорость Z", color="green")
 # axs2[2].set_title("График скорости по Z")
 # axs2[2].set_xlabel("Время (с)")
 # axs2[2].set_ylabel("Скорость (м/с)")
@@ -115,6 +115,17 @@ axs2.grid()
 # axs3[2].plot(time_auto, z_data, label="Z", color="green")
 # axs3[2].set_title("Смещение по Z")
 # axs3[2].grid()
+
+speed = np.sqrt(speed_y_data ** 2 + speed_x_data ** 2)
+# print(speed)
+plt.figure(figsize=(10, 6))
+plt.plot(time_data, speed, label="Скорость от времени", color="green")
+plt.xlabel("Время (с)")
+plt.ylabel("Скорость (м/с)")
+plt.title("Скорость ракеты от времени")
+plt.legend()
+plt.grid()
+plt.show()
 
 plt.tight_layout()
 plt.show()
