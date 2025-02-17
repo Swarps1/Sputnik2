@@ -138,9 +138,9 @@ def main():
     print(f'time to apoapsis {tta}')
 
     
-    while tta > 10:
-        tta = vessel.orbit.time_to_apoapsis
-        continue
+    # while tta > 10:
+    #     tta = vessel.orbit.time_to_apoapsis
+    #     continue
     # # Построение графиков
     # fig1, axs1 = plt.subplots(2, 1, figsize=(10, 10))
 
